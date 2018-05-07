@@ -25,22 +25,10 @@ const concursoController = require("./controllers/concursoControllers");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//get router
-var router = express.Router();
-var API_URL = "https://treinamento-typeorm.herokuapp.com/";
-//options for cors midddleware
-const options = {
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
-    credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: API_URL,
-    preflightContinue: false
-};
-//use cors middleware
-router.use(cors(options));
-//add your routes
-//enable pre-flight
-router.options("*", cors(options));
+/**
+ * Setup CORS
+ */
+app.use(cors());
 /**
  * Express configuration.
  */

@@ -18,24 +18,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var API_URL = "/";
+/**
+ * Setup CORS
+ */
+app.use(cors());
 
-//options for cors midddleware
-const options:cors.CorsOptions = {
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
-  credentials: true,
-  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-  origin: API_URL,
-  preflightContinue: false
-};
-
-//use cors middleware
-app.use(cors(options));
-
-//add your routes
-
-//enable pre-flight
-app.options("*", cors(options));
 
 /**
  * Express configuration.
