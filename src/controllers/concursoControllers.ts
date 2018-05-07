@@ -22,19 +22,19 @@ export let findByCod = async (req: Request, res: Response) => {
     //res.status(200).send(concursos);
 
 
-    let gambs = "";
+    let whereStr = "";
     for (let i = 0; i < concursos.profissoes.length; i++) {
         if (i) {
-            gambs += " OR ";
+            whereStr += " OR ";
         }
-        gambs += "profissoes.id = " + concursos.profissoes[i].id;
+        whereStr += "profissoes.id = " + concursos.profissoes[i].id;
     }
-    //console.log(gambs);
+    //console.log(whereStr);
 
     let candidatos = getRepository(Candidato)
         .createQueryBuilder("candidato")
         .leftJoinAndSelect("candidato.profissoes", "profissoes")
-        .where(gambs)
+        .where(whereStr)
         .take(limit).skip(page)
         .getMany();
 

@@ -23,18 +23,18 @@ exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {
         .where("concurso.codigo = :cod", { cod: req.params.cod })
         .take(limit).skip(page).getOne();
     //res.status(200).send(concursos);
-    let gambs = "";
+    let whereStr = "";
     for (let i = 0; i < concursos.profissoes.length; i++) {
         if (i) {
-            gambs += " OR ";
+            whereStr += " OR ";
         }
-        gambs += "profissoes.id = " + concursos.profissoes[i].id;
+        whereStr += "profissoes.id = " + concursos.profissoes[i].id;
     }
-    //console.log(gambs);
+    //console.log(whereStr);
     let candidatos = typeorm_1.getRepository(Candidato_1.Candidato)
         .createQueryBuilder("candidato")
         .leftJoinAndSelect("candidato.profissoes", "profissoes")
-        .where(gambs)
+        .where(whereStr)
         .take(limit).skip(page)
         .getMany();
     candidatos.then((result) => {
