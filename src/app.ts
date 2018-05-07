@@ -18,10 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//get router
-var router = express.Router();
-
-var API_URL = "https://treinamento-typeorm.herokuapp.com/";
+var API_URL = "/";
 
 //options for cors midddleware
 const options:cors.CorsOptions = {
@@ -33,12 +30,12 @@ const options:cors.CorsOptions = {
 };
 
 //use cors middleware
-router.use(cors(options));
+app.use(cors(options));
 
 //add your routes
 
 //enable pre-flight
-router.options("*", cors(options));
+app.options("*", cors(options));
 
 /**
  * Express configuration.
