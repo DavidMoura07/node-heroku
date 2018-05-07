@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //get router
 var router = express.Router();
 
-var API_URL = "http://localhost:3000";
+var API_URL = "https://treinamento-typeorm.herokuapp.com/";
 
 //options for cors midddleware
 const options:cors.CorsOptions = {
