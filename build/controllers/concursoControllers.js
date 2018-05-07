@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Candidato_1 = require("../entities/Candidato");
 const Concurso_1 = require("../entities/Concurso");
-exports.findByCPF = (req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {
     //define how many items do you want to show
     let limit = 10;
     //if pagination will starts with 1 and not 0 keep this line

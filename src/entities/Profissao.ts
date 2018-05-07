@@ -1,12 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+//construindo a "classe" profissao
 
-@Entity()
+import {Entity, Column,  PrimaryGeneratedColumn} from "typeorm";
+
+@Entity("profissao")
 export class Profissao {
 
+    //campo de chave primaria: id
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    //varchar(255) nome
+    @Column({
+        length: 100
+    })
     nome: string;
 
 }

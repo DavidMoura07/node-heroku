@@ -12,14 +12,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
-//import * as appConfig from "./index";
 const appConfig = require("./common/app-config");
-const candidatoController = require("./controllers/candidatoController");
-const concursoController = require("./controllers/concursoControllers");
 /**
  * Controllers (route handlers).
  */
-//import * as empController from "./controllers/employee-controller";
+const candidatoController = require("./controllers/candidatoController");
+const concursoController = require("./controllers/concursoControllers");
 /**
  * Create Express server.
  */
@@ -42,12 +40,12 @@ app.listen(app.get("port"), () => {
  */
 app.get("/candidatos", candidatoController.findAll);
 app.get("/candidatos/:cpf/page/:page", candidatoController.findByCPF);
-app.get("/concursos/:cod/page/:page", concursoController.findByCPF);
+app.get("/concursos/:cod/page/:page", concursoController.findByCod);
 /**
  * Create connection to DB using configuration provided in
  * appconfig file.
  */
-typeorm_1.createConnection(appConfig.dbSqlite).then((connection) => __awaiter(this, void 0, void 0, function* () {
+typeorm_1.createConnection(appConfig.dbMySql).then((connection) => __awaiter(this, void 0, void 0, function* () {
     console.log("Connected to DB");
 })).catch(error => console.log("TypeORM connection error: ", error));
 module.exports = app;

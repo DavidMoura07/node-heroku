@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 exports.dbMySql = {
     type: "mysql",
-    host: "localhost",
+    host: "den1.mysql6.gear.host",
     port: 3306,
-    username: "root",
-    password: "root",
-    database: "treinamento",
+    username: "type",
+    password: "Km4bqF3d-L_j",
+    database: "type",
     entities: ["./entities/*.js"],
     synchronize: true
 };

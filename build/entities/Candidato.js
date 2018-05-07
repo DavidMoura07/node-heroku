@@ -1,4 +1,5 @@
 "use strict";
+//construindo a "classe" candidato
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,7 +36,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Candidato.prototype, "profissoes", void 0);
 Candidato = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity("candidato")
 ], Candidato);
 exports.Candidato = Candidato;
 //# sourceMappingURL=Candidato.js.map

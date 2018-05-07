@@ -2,15 +2,14 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-//import * as appConfig from "./index";
 import * as appConfig from "./common/app-config";
-import * as candidatoController from "./controllers/candidatoController";
-import * as concursoController from "./controllers/concursoControllers";
+
 
 /**
  * Controllers (route handlers).
  */
-//import * as empController from "./controllers/employee-controller";
+import * as candidatoController from "./controllers/candidatoController";
+import * as concursoController from "./controllers/concursoControllers";
 
 /**
  * Create Express server.
@@ -18,6 +17,7 @@ import * as concursoController from "./controllers/concursoControllers";
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 /**
  * Express configuration.
  */
@@ -42,7 +42,7 @@ app.get("/concursos/:cod/page/:page", concursoController.findByCod);
  * Create connection to DB using configuration provided in 
  * appconfig file.
  */
-createConnection(appConfig.dbSqlite).then(async connection => {
+createConnection(appConfig.dbMySql).then(async connection => {
   console.log("Connected to DB");
 
 }).catch(error => console.log("TypeORM connection error: ", error));

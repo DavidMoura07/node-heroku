@@ -1,5 +1,4 @@
 "use strict";
-//construindo a "classe" orgao
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,25 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const Concurso_1 = require("./Concurso");
-let Orgao = class Orgao {
+const Orgao_1 = require("./Orgao");
+const Profissao_1 = require("./Profissao");
+let Concurso = class Concurso {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Orgao.prototype, "id", void 0);
+], Concurso.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({
-        length: 255
-    }),
+    typeorm_1.Column(),
     __metadata("design:type", String)
-], Orgao.prototype, "nome", void 0);
+], Concurso.prototype, "edital", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => Concurso_1.Concurso, concurso => concurso.orgao),
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Concurso.prototype, "codigo", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => Orgao_1.Orgao, orgao => orgao.concursos),
+    __metadata("design:type", Orgao_1.Orgao)
+], Concurso.prototype, "orgao", void 0);
+__decorate([
+    typeorm_1.ManyToMany(type => Profissao_1.Profissao),
+    typeorm_1.JoinTable(),
     __metadata("design:type", Array)
-], Orgao.prototype, "concursos", void 0);
-Orgao = __decorate([
-    typeorm_1.Entity("orgao")
-], Orgao);
-exports.Orgao = Orgao;
-//# sourceMappingURL=Orgao.js.map
+], Concurso.prototype, "profissoes", void 0);
+Concurso = __decorate([
+    typeorm_1.Entity()
+], Concurso);
+exports.Concurso = Concurso;
+//# sourceMappingURL=E_Concurso.js.map

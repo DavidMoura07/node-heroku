@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//construindo a "classe" concurso
 const typeorm_1 = require("typeorm");
 const Orgao_1 = require("./Orgao");
 const Profissao_1 = require("./Profissao");
@@ -21,11 +22,11 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Concurso.prototype, "edital", void 0);
+], Concurso.prototype, "codigo", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", Number)
-], Concurso.prototype, "codigo", void 0);
+    __metadata("design:type", String)
+], Concurso.prototype, "edital", void 0);
 __decorate([
     typeorm_1.ManyToOne(type => Orgao_1.Orgao, orgao => orgao.concursos),
     __metadata("design:type", Orgao_1.Orgao)
@@ -36,7 +37,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Concurso.prototype, "profissoes", void 0);
 Concurso = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity("concurso")
 ], Concurso);
 exports.Concurso = Concurso;
 //# sourceMappingURL=Concurso.js.map

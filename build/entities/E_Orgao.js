@@ -1,5 +1,4 @@
 "use strict";
-//construindo a "classe" orgao
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,9 +18,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Orgao.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({
-        length: 255
-    }),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Orgao.prototype, "nome", void 0);
 __decorate([
@@ -29,7 +26,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Orgao.prototype, "concursos", void 0);
 Orgao = __decorate([
-    typeorm_1.Entity("orgao")
+    typeorm_1.Entity()
 ], Orgao);
 exports.Orgao = Orgao;
-//# sourceMappingURL=Orgao.js.map
+//# sourceMappingURL=E_Orgao.js.map

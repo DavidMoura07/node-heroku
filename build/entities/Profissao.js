@@ -1,4 +1,5 @@
 "use strict";
+//construindo a "classe" profissao
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,11 +18,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Profissao.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({
+        length: 100
+    }),
     __metadata("design:type", String)
 ], Profissao.prototype, "nome", void 0);
 Profissao = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity("profissao")
 ], Profissao);
 exports.Profissao = Profissao;
 //# sourceMappingURL=Profissao.js.map

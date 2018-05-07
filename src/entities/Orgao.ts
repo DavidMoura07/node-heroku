@@ -1,15 +1,22 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
-import {Concurso} from "./Concurso"
+//construindo a "classe" orgao
 
-@Entity()
+import {Entity, Column,  PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Concurso } from  "./Concurso";
+
+@Entity("orgao")
 export class Orgao {
 
+    //campo de chave primaria: id
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    //varchar(255) nome
+    @Column({
+        length: 255
+    })
     nome: string;
 
     @OneToMany(type => Concurso, concurso => concurso.orgao)
     concursos: Concurso[];
+
 }

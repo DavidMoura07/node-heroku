@@ -1,23 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+//construindo a "classe" concurso
+import {Entity, Column,  PrimaryGeneratedColumn, ManyToMany, ManyToOne, JoinTable } from "typeorm";
 import { Orgao } from "./Orgao";
 import { Profissao } from "./Profissao";
 
-@Entity()
+
+@Entity("concurso")
 export class Concurso {
 
+    //campo de chave primaria: id
     @PrimaryGeneratedColumn()
     id: number;
 
+    //codigo do concurso
+    @Column()
+    codigo: string;
+
+    //edital
     @Column()
     edital: string;
 
-    @Column()
-    codigo: number;
-
-    @ManyToOne(type => Orgao, orgao => orgao.concursos)
+    @ManyToOne( type => Orgao, orgao => orgao.concursos )
     orgao: Orgao;
 
     @ManyToMany(type => Profissao)
     @JoinTable()
-    profissoes: Profissao[];
+    profissoes : Profissao[];
+
 }
