@@ -4,6 +4,19 @@ import { Candidato } from "../entities/Candidato";
 import { Concurso } from "../entities/Concurso";
 import { Profissao } from "../entities/Profissao";
 
+export let findOne = async (req: Request, res: Response) => {
+    let concurso = await getRepository(Concurso).createQueryBuilder("concurso")
+        .leftJoinAndSelect("concurso.profissoes", "vagas")
+        .where("concurso.codigo = :cod", { cod: req.params.cod })
+        .getOne();
+
+    if(Concurso){
+        res.status(200).send(concurso);
+    }else{
+        res.status(404).send({message: "Candidato não encontrado!"});
+    }
+
+}
 
 export let findByCod = async (req: Request, res: Response) => {
 
@@ -17,7 +30,7 @@ export let findByCod = async (req: Request, res: Response) => {
     let concursos = await getRepository(Concurso).createQueryBuilder("concurso")
         .leftJoinAndSelect("concurso.profissoes", "vagas")
         .where("concurso.codigo = :cod", { cod: req.params.cod })
-        .take(limit).skip(page).getOne();
+        .getOne();
 
     if(concursos){
         let whereStr = "";

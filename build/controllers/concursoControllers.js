@@ -11,6 +11,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Candidato_1 = require("../entities/Candidato");
 const Concurso_1 = require("../entities/Concurso");
+exports.findOne = (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let concurso = yield typeorm_1.getRepository(Concurso_1.Concurso).createQueryBuilder("concurso")
+        .leftJoinAndSelect("concurso.profissoes", "vagas")
+        .where("concurso.codigo = :cod", { cod: req.params.cod })
+        .getOne();
+    if (Concurso_1.Concurso) {
+        res.status(200).send(concurso);
+    }
+    else {
+        res.status(404).send({ message: "Candidato não encontrado!" });
+    }
+});
 exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {
     //define how many items do you want to show
     let limit = 10;
@@ -21,7 +33,7 @@ exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {
     let concursos = yield typeorm_1.getRepository(Concurso_1.Concurso).createQueryBuilder("concurso")
         .leftJoinAndSelect("concurso.profissoes", "vagas")
         .where("concurso.codigo = :cod", { cod: req.params.cod })
-        .take(limit).skip(page).getOne();
+        .getOne();
     if (concursos) {
         let whereStr = "";
         for (let i = 0; i < concursos.profissoes.length; i++) {
