@@ -25,19 +25,19 @@ exports.findByCPF = (req, res) => __awaiter(this, void 0, void 0, function* () {
         .where("candidato.cpf = :cpf", { cpf: req.params.cpf })
         .getOne();
     if (candidatos) {
-        let gambs = "";
+        let whereStr = "";
         for (let i = 0; i < candidatos.profissoes.length; i++) {
             if (i) {
-                gambs += " OR ";
+                whereStr += " OR ";
             }
-            gambs += "vagas.id = " + candidatos.profissoes[i].id;
+            whereStr += "vagas.id = " + candidatos.profissoes[i].id;
         }
         //console.log(gambs);
         let concursos = typeorm_1.getRepository(Concurso_1.Concurso)
             .createQueryBuilder("concurso")
             .leftJoinAndSelect("concurso.orgao", "orgao")
             .leftJoinAndSelect("concurso.profissoes", "vagas")
-            .where(gambs)
+            .where(whereStr)
             .take(limit).skip(page)
             .getMany();
         concursos.then((result) => {
@@ -45,7 +45,7 @@ exports.findByCPF = (req, res) => __awaiter(this, void 0, void 0, function* () {
         });
     }
     else {
-        res.send({ message: 'Candidato não encontrado' });
+        res.status(404).send({ message: "Candidato não encontrado!" });
     }
 });
 //# sourceMappingURL=candidatoController.js.map

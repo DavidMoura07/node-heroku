@@ -22,23 +22,27 @@ exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {
         .leftJoinAndSelect("concurso.profissoes", "vagas")
         .where("concurso.codigo = :cod", { cod: req.params.cod })
         .take(limit).skip(page).getOne();
-    //res.status(200).send(concursos);
-    let whereStr = "";
-    for (let i = 0; i < concursos.profissoes.length; i++) {
-        if (i) {
-            whereStr += " OR ";
+    if (concursos) {
+        let whereStr = "";
+        for (let i = 0; i < concursos.profissoes.length; i++) {
+            if (i) {
+                whereStr += " OR ";
+            }
+            whereStr += "profissoes.id = " + concursos.profissoes[i].id;
         }
-        whereStr += "profissoes.id = " + concursos.profissoes[i].id;
+        //console.log(whereStr);
+        let candidatos = typeorm_1.getRepository(Candidato_1.Candidato)
+            .createQueryBuilder("candidato")
+            .leftJoinAndSelect("candidato.profissoes", "profissoes")
+            .where(whereStr)
+            .take(limit).skip(page)
+            .getMany();
+        candidatos.then((result) => {
+            res.status(200).send(result);
+        });
     }
-    //console.log(whereStr);
-    let candidatos = typeorm_1.getRepository(Candidato_1.Candidato)
-        .createQueryBuilder("candidato")
-        .leftJoinAndSelect("candidato.profissoes", "profissoes")
-        .where(whereStr)
-        .take(limit).skip(page)
-        .getMany();
-    candidatos.then((result) => {
-        res.status(200).send(result);
-    });
+    else {
+        res.status(404).send({ message: "Concurso não encontrado!" });
+    }
 });
 //# sourceMappingURL=concursoControllers.js.map

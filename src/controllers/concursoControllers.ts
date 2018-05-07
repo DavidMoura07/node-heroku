@@ -19,26 +19,27 @@ export let findByCod = async (req: Request, res: Response) => {
         .where("concurso.codigo = :cod", { cod: req.params.cod })
         .take(limit).skip(page).getOne();
 
-    //res.status(200).send(concursos);
-
-
-    let whereStr = "";
-    for (let i = 0; i < concursos.profissoes.length; i++) {
-        if (i) {
-            whereStr += " OR ";
+    if(concursos){
+        let whereStr = "";
+        for (let i = 0; i < concursos.profissoes.length; i++) {
+            if (i) {
+                whereStr += " OR ";
+            }
+            whereStr += "profissoes.id = " + concursos.profissoes[i].id;
         }
-        whereStr += "profissoes.id = " + concursos.profissoes[i].id;
+        //console.log(whereStr);
+
+        let candidatos = getRepository(Candidato)
+            .createQueryBuilder("candidato")
+            .leftJoinAndSelect("candidato.profissoes", "profissoes")
+            .where(whereStr)
+            .take(limit).skip(page)
+            .getMany();
+
+        candidatos.then((result: any) => {
+            res.status(200).send(result);
+        })
+    }else{
+        res.status(404).send({message: "Concurso não encontrado!"});
     }
-    //console.log(whereStr);
-
-    let candidatos = getRepository(Candidato)
-        .createQueryBuilder("candidato")
-        .leftJoinAndSelect("candidato.profissoes", "profissoes")
-        .where(whereStr)
-        .take(limit).skip(page)
-        .getMany();
-
-    candidatos.then((result: any) => {
-        res.status(200).send(result);
-    })
 }

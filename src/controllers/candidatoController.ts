@@ -21,12 +21,12 @@ export let findByCPF = async (req: Request, res: Response) => {
         .where("candidato.cpf = :cpf", { cpf: req.params.cpf })
         .getOne();
     if(candidatos){
-        let gambs = "";
+        let whereStr = "";
         for (let i = 0; i < candidatos.profissoes.length; i++) {
             if (i) {
-                gambs += " OR ";
+                whereStr += " OR ";
             }
-            gambs += "vagas.id = " + candidatos.profissoes[i].id;
+            whereStr += "vagas.id = " + candidatos.profissoes[i].id;
         }
         //console.log(gambs);
 
@@ -34,7 +34,7 @@ export let findByCPF = async (req: Request, res: Response) => {
             .createQueryBuilder("concurso")
             .leftJoinAndSelect("concurso.orgao", "orgao")
             .leftJoinAndSelect("concurso.profissoes", "vagas")
-            .where(gambs)
+            .where(whereStr)
             .take(limit).skip(page)
             .getMany();
 
@@ -43,7 +43,7 @@ export let findByCPF = async (req: Request, res: Response) => {
         })
     }
     else{
-        res.send({message: 'Candidato não encontrado'});
+        res.status(404).send({message: "Candidato não encontrado!"});
     }
     
 }

@@ -28,7 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * Setup CORS
  */
-app.use(cors());
+app.use(cors({
+    credentials: true,
+}));
 /**
  * Express configuration.
  */
