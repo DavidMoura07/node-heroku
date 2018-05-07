@@ -16,11 +16,11 @@ exports.findOne = (req, res) => __awaiter(this, void 0, void 0, function* () {
         .leftJoinAndSelect("concurso.profissoes", "vagas")
         .where("concurso.codigo = :cod", { cod: req.params.cod })
         .getOne();
-    if (Concurso_1.Concurso) {
+    if (concurso) {
         res.status(200).send(concurso);
     }
     else {
-        res.status(404).send({ message: "Candidato não encontrado!" });
+        res.status(404).send({ message: "Concurso não encontrado!" });
     }
 });
 exports.findByCod = (req, res) => __awaiter(this, void 0, void 0, function* () {

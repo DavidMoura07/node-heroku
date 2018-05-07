@@ -46,6 +46,7 @@ app.get("/candidatos", candidatoController.findAll);
 app.get("/candidatos/:cpf/page/:page", candidatoController.findByCPF);
 app.get("/concursos/:cod/page/:page", concursoController.findByCod);
 app.get("/candidatos/:cpf", candidatoController.findOne);
+app.get("/concursos/:cod", concursoController.findOne);
 
 /**
  * Create connection to DB using configuration provided in 
