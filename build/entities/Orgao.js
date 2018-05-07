@@ -19,9 +19,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Orgao.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({
-        length: 255
-    }),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Orgao.prototype, "nome", void 0);
 __decorate([

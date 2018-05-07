@@ -18,9 +18,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Profissao.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({
-        length: 100
-    }),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Profissao.prototype, "nome", void 0);
 Profissao = __decorate([

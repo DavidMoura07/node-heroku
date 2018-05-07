@@ -10,9 +10,7 @@ export class Profissao {
     id: number;
 
     //varchar(255) nome
-    @Column({
-        length: 100
-    })
+    @Column()
     nome: string;
 
 }

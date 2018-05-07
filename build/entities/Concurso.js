@@ -21,7 +21,7 @@ __decorate([
 ], Concurso.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Concurso.prototype, "codigo", void 0);
 __decorate([
     typeorm_1.Column(),

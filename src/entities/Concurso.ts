@@ -13,7 +13,7 @@ export class Concurso {
 
     //codigo do concurso
     @Column()
-    codigo: string;
+    codigo: number;
 
     //edital
     @Column()

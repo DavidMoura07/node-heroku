@@ -11,9 +11,7 @@ export class Orgao {
     id: number;
 
     //varchar(255) nome
-    @Column({
-        length: 255
-    })
+    @Column()
     nome: string;
 
     @OneToMany(type => Concurso, concurso => concurso.orgao)
