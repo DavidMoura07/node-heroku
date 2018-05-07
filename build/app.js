@@ -48,6 +48,7 @@ app.listen(app.get("port"), () => {
 app.get("/candidatos", candidatoController.findAll);
 app.get("/candidatos/:cpf/page/:page", candidatoController.findByCPF);
 app.get("/concursos/:cod/page/:page", concursoController.findByCod);
+app.get("/candidatos/:cpf", candidatoController.findOne);
 /**
  * Create connection to DB using configuration provided in
  * appconfig file.

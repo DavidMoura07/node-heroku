@@ -11,6 +11,18 @@ export let findAll = async (req: Request, res: Response) => {
     })
 }
 
+export let findOne = async (req: Request, res: Response) => {
+    let candidato = await getRepository(Candidato).createQueryBuilder("candidato")
+    .where("candidato.cpf = :cpf", { cpf: req.params.cpf })
+    .getOne();
+
+    if(candidato){
+        res.status(200).send(candidato);
+    }else{
+        res.status(404).send({message: "Candidato não encontrado!"});
+    }
+}
+
 export let findByCPF = async (req: Request, res: Response) => {
 
     let limit = 10;

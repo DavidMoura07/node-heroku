@@ -17,6 +17,17 @@ exports.findAll = (req, res) => __awaiter(this, void 0, void 0, function* () {
         res.send(result);
     });
 });
+exports.findOne = (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let candidato = yield typeorm_1.getRepository(Candidato_1.Candidato).createQueryBuilder("candidato")
+        .where("candidato.cpf = :cpf", { cpf: req.params.cpf })
+        .getOne();
+    if (candidato) {
+        res.status(200).send(candidato);
+    }
+    else {
+        res.status(404).send({ message: "Candidato não encontrado!" });
+    }
+});
 exports.findByCPF = (req, res) => __awaiter(this, void 0, void 0, function* () {
     let limit = 10;
     let page = (Number(req.params.page) - 1) * limit;
