@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as appConfig from "./common/app-config";
-
+import * as cors from "cors";
 
 /**
  * Controllers (route handlers).
@@ -17,6 +17,28 @@ import * as concursoController from "./controllers/concursoControllers";
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//get router
+var router = express.Router();
+
+var API_URL = "http://localhost:3000";
+
+//options for cors midddleware
+const options:cors.CorsOptions = {
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  origin: API_URL,
+  preflightContinue: false
+};
+
+//use cors middleware
+router.use(cors(options));
+
+//add your routes
+
+//enable pre-flight
+router.options("*", cors(options));
 
 /**
  * Express configuration.

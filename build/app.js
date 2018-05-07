@@ -13,6 +13,7 @@ const bodyParser = require("body-parser");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const appConfig = require("./common/app-config");
+const cors = require("cors");
 /**
  * Controllers (route handlers).
  */
@@ -24,6 +25,22 @@ const concursoController = require("./controllers/concursoControllers");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//get router
+var router = express.Router();
+var API_URL = "http://localhost:3000";
+//options for cors midddleware
+const options = {
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+    credentials: true,
+    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+    origin: API_URL,
+    preflightContinue: false
+};
+//use cors middleware
+router.use(cors(options));
+//add your routes
+//enable pre-flight
+router.options("*", cors(options));
 /**
  * Express configuration.
  */
